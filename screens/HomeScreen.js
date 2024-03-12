@@ -1,14 +1,16 @@
 import { View, Text, Image, TextInput, ScrollView } from 'react-native';
-import {useLayoutEffect} from 'react';
+import {useEffect, useLayoutEffect, useState} from 'react';
 import {useNavigation} from "@react-navigation/native";
 // this safe area view works for expo apps, not the orignial componet from react-native
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { UserIcon, ChevronDownIcon, AdjustmentsVerticalIcon, MagnifyingGlassIcon} from 'react-native-heroicons/outline';
 import Categories from '../components/Categories';
 import FeaturedRow from '../components/FeaturedRow';
+import createClient from '../sanity';
 
 const HomeScreen = () => {
     const navigation = useNavigation();
+    const [featuredCategories, setFeaturedCategories] = useState([])
 
     useLayoutEffect(() => {{
 
@@ -17,7 +19,22 @@ const HomeScreen = () => {
         });
     }}, [])
 
+    useEffect( () => {
+        createClient.fetch(`
+        *[
+            _type == 'featured']{
+              ...,
+            restaurants[] ->{
+              ...,
+              dishes[] ->,
+                }
+            }
+        
+        `).then(data => {setFeaturedCategories(data)})
+    }, []
 
+
+    )
     return (
         <SafeAreaView className='bg-white pt-5'>
                 <View className='flex-row pb-3 items-center mx-4 space-x-2'>
@@ -52,29 +69,18 @@ const HomeScreen = () => {
                     contentContainerStyle = {{
                         paddingBottom: 100,
                     }}>
-                    <Categories>
-                        
-                    </Categories>
+                    <Categories />
 
-                    <FeaturedRow
-                        id = '123'
-                        title = 'Featured'
-                        description = 'Paid placements from our partners'
+                    {featuredCategories?.map(category => (
+                        <FeaturedRow
+                        key = {category._id}
+                        id = {category._id}
+                        title = {category.name}
+                        description = {category.short_description}
                     />
 
-                    <FeaturedRow
-                        id = '1234'
-                        title = 'Tasty Discounts'
-                        description = 'Paid placements from our partners'
-                    />
+                    ))}
 
-                    <FeaturedRow
-                        id = '12345'
-                        title = 'Offers near you'
-                        description = 'Paid placements from our partners'
-
-                    />
-                        
                 </ScrollView>
 
         </SafeAreaView>
