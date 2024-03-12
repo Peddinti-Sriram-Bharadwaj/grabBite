@@ -7,7 +7,7 @@ const CategoryCard = ({imgUrl, title }) => {
         source = {{
             uri: imgUrl,
         }}
-        className= 'h-20 w-20 rounded'
+        className= 'h-20 w-20 mx-1 rounded'
         
         /> 
         <View>

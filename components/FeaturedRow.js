@@ -1,8 +1,8 @@
 import { View, Text, ScrollView } from 'react-native'
 import {ArrowRightIcon} from 'react-native-heroicons/outline';
-import RestaurantCard from '../components/RestaurantCard';
 import { useState, useEffect } from 'react';
 import  createClient from '../sanity';
+import RestaurantCard from './RestaurantCard';
 
 const FeaturedRow = ({id, title, description}) => {
   const [restaurants, setRestaurants] = useState([])
@@ -26,7 +26,7 @@ const FeaturedRow = ({id, title, description}) => {
    })
 
 
-  },[]);
+  },[id]);
 
   return (
     <View>
