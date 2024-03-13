@@ -6,6 +6,7 @@ import {StarIcon} from 'react-native-heroicons/solid';
 import {ArrowLeftIcon, ChevronRightIcon, AdjustmentsVerticalIcon, MagnifyingGlassIcon,MapPinIcon, QuestionMarkCircleIcon } from 'react-native-heroicons/outline'
 
 import DishRow from '../components/DishRow';
+import BasketIcon from '../components/BasketIcon';
 
 const RestaurantScreen = () => {
     const navigation = useNavigation();
@@ -29,6 +30,10 @@ const RestaurantScreen = () => {
     }, []);
 
   return (
+    <>
+
+    <BasketIcon />
+
     <ScrollView>
         <View className = 'relative bg-gray-100'>
         <Image 
@@ -71,7 +76,7 @@ const RestaurantScreen = () => {
             <ChevronRightIcon color = '00CCBB' />
         </TouchableOpacity>
 
-        <View> 
+        <View classNme = 'pb-36'> 
             <Text className = 'px-4 pt-6 mb-3 font-bold text-xl'> 
                 Menu 
             </Text>
@@ -91,6 +96,8 @@ const RestaurantScreen = () => {
         </View>
       
     </ScrollView>
+    </>
+    
   )
 }
 
