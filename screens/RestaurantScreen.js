@@ -48,7 +48,7 @@ const RestaurantScreen = () => {
 
         <View classname = 'bg-white'>
             <View classname = 'px-4 pt-4'>
-                <Text classname = 'text-3xl font-bold'> {title}</Text>
+                <Text className = 'text-2xl font-bold'> {title}</Text>
                 <View className = 'flex-row space-x-2 my-1'>
                     <View className = 'flex-row items-centerspace-x-1'>
                         <StarIcon color = 'green' opacity = {0.5} size = {22} />
@@ -76,7 +76,7 @@ const RestaurantScreen = () => {
             <ChevronRightIcon color = '00CCBB' />
         </TouchableOpacity>
 
-        <View classNme = 'pb-36'> 
+        <View className = 'pb-36'> 
             <Text className = 'px-4 pt-6 mb-3 font-bold text-xl'> 
                 Menu 
             </Text>
