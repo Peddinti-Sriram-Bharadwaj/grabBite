@@ -1,15 +1,19 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import {useRoute, useNavigation} from '@react-navigation/native'
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useEffect } from 'react';
 import { urlFor } from '../sanity';
 import {StarIcon} from 'react-native-heroicons/solid';
 import {ArrowLeftIcon, ChevronRightIcon, AdjustmentsVerticalIcon, MagnifyingGlassIcon,MapPinIcon, QuestionMarkCircleIcon } from 'react-native-heroicons/outline'
+import {useDispatch} from 'react-redux'
+import {setRestaurant } from '../features/restaurantSlice'
 
 import DishRow from '../components/DishRow';
 import BasketIcon from '../components/BasketIcon';
 
 const RestaurantScreen = () => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+
     const {params: {
         id,
         imgUrl,
@@ -22,6 +26,22 @@ const RestaurantScreen = () => {
         long,
         lat,
     }} = useRoute();
+
+    useEffect(() => {
+        dispatch(setRestaurant({
+        id,
+        imgUrl,
+        title,
+        rating,
+        genre,
+        address,
+        short_description,
+        dishes,
+        long,
+        lat,
+        })
+        )
+    }, [dispatch]);
 
     useLayoutEffect(() => {
         navigation.setOptions({

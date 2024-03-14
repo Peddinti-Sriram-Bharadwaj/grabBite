@@ -1,48 +1,42 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
     items: [],
 }
 
-export const addToBasket = createAsyncThunk(
-    'basket/addToBasket',
-    async (payload) => {
-        // Add your async logic here
-        return payload;
-    }
-);
-
-export const removeFromBasket = createAsyncThunk(
-    'basket/removeFromBasket',
-    async (payload) => {
-        // Add your async logic here
-        return payload;
-    }
-);
 
 export const basketSlice = createSlice({
     name: 'basket',
     initialState,
 
-    reducers: {},
+    reducers: {
+        addToBasket: (state, action) => {
+            state.items = [...state.items, action.payload];
+        },
 
-    extraReducers: (builder) => {
-        builder
-            .addCase(addToBasket.fulfilled, (state, action) => {
-                state.items = [...state.items, action.payload];
-            })
-            .addCase(removeFromBasket.fulfilled, (state, action) => {
-                const index = state.items.findIndex((item) => item.id === action.payload.id);
-                let newBasket = [...state.items];
-                if (index >= 0) {
-                    newBasket.splice(index, 1);
-                } else {
-                    console.warn(`cant remove product (id: ${action.payload.id}) as it is not in basket!`);
-                }
-                state.items = newBasket;
-            });
+        removeFromBasket: (state, action) => {
+            const index = state.items.findIndex(
+                (item) => item.id === action.payload.id
+            );
+
+            let newBasket = [...state.items];
+
+            if (index >=0){
+                newBasket.splice(index,1);
+            }
+            else{
+                console.warn(
+                    'Cant remove product (id: ${action.payload.id}) as it is not in basket!'
+                );
+            }
+
+            state.items = newBasket;
+        }
     },
+
 });
+
+export const {addToBasket, removeFromBasket} = basketSlice.actions;
 
 export const selectBasketItems = (state) => state.basket.items;
 
