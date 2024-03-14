@@ -12,7 +12,7 @@ const PreparingOrderScreen = () => {
         setTimeout(() => {
             navigation.navigate("Delivery");
 
-        }, 4000);
+        }, 3000);
         
 
     },[]);
