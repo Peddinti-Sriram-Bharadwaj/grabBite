@@ -1,0 +1,20 @@
+The goal of this project is to start from a good initial policy. 
+
+That will help faster convergence. 
+
+The model will learn from an expert wich is part of the models environment
+
+we assume that the actions of the expert are also a part of the models environment. 
+
+Becuase it is difficult to design a reward function for each adn every scenario, and it requires the agent to know about the environment, in which case it doenst have to depend on the expert, we instead intend to use Inverse Reinforcement leanring so that the agent will be even more prompted to learn from the expert. 
+
+
+The following questions need be answered in ablation studies. 
+
+1) when does the agent start to take actions independently?
+
+2) should the agent only observe while learning, or also start taking actions?
+
+3) can we make the agent smart enoguh to bypass the experts learning curve and instead just make conclusions rather than the reasoning for taking an action?
+
+4) can it be show empirically that imitation would lead to a global optimum ?
